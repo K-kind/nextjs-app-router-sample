@@ -14,7 +14,7 @@ type Coffee = {
 
 const getCoffees = async (type: CoffeeType): Promise<Coffee[]> => {
   if (type === "iced") {
-    await new Promise((resolve) => setTimeout(resolve, 10000));
+    await new Promise((resolve) => setTimeout(resolve, 5000));
   }
   const resp = await fetch(
     `https://oqqhqztkvpb5q3od6h7r57q32e0xxezp.lambda-url.ap-southeast-2.on.aws/coffee/${type}`,
