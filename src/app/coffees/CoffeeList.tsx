@@ -13,10 +13,14 @@ type Coffee = {
 };
 
 const getCoffees = async (type: CoffeeType): Promise<Coffee[]> => {
+  if (type === "iced") {
+    await new Promise((resolve) => setTimeout(resolve, 10000));
+  }
   const resp = await fetch(
     `https://oqqhqztkvpb5q3od6h7r57q32e0xxezp.lambda-url.ap-southeast-2.on.aws/coffee/${type}`,
     {
-      next: { revalidate: 180 },
+      // next: { revalidate: 180 },
+      cache: "no-cache",
     },
   );
   const coffees = (await resp.json()) as Exclude<Coffee, "type">[];
