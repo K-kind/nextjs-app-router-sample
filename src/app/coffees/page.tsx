@@ -4,7 +4,7 @@ import { CoffeeList } from "@/app/coffees/CoffeeList";
 
 export default function CoffeeListPage() {
   return (
-    <div>
+    <>
       <h1 className="text-2xl mb-4">Hot Coffees</h1>
       <CoffeeList type="hot" isTop />
 
@@ -14,6 +14,6 @@ export default function CoffeeListPage() {
       <Suspense fallback={<p>Loading...</p>}>
         <CoffeeList type="iced" />
       </Suspense>
-    </div>
+    </>
   );
 }

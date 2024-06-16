@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 type CoffeeType = "hot" | "iced";
 
@@ -33,19 +34,23 @@ export async function CoffeeList({ type, isTop }: Props) {
   return (
     <ul className="grid grid-cols-3 gap-x-3 gap-y-6">
       {coffees.map((coffee, index) => (
-        <li key={coffee.id}>
-          <h2 className="text-lg mb-2">{coffee.title}</h2>
-          <p className="line-clamp-3 min-h-[72px] mb-2">{coffee.description}</p>
-          <Image
-            src={coffee.image}
-            alt={coffee.title}
-            width={640}
-            height={960}
-            sizes="33vw"
-            style={{ objectFit: "cover", width: "100%", height: "320px" }}
-            priority={isTop && index < 6}
-          />
-        </li>
+        <Link key={coffee.id} href={`/coffees/${coffee.type}-${coffee.id}`}>
+          <li>
+            <h2 className="text-lg mb-2">{coffee.title}</h2>
+            <p className="line-clamp-3 min-h-[72px] mb-2">
+              {coffee.description}
+            </p>
+            <Image
+              src={coffee.image}
+              alt={coffee.title}
+              width={640}
+              height={960}
+              sizes="33vw"
+              style={{ objectFit: "cover", width: "100%", height: "320px" }}
+              priority={isTop && index < 6}
+            />
+          </li>
+        </Link>
       ))}
     </ul>
   );
