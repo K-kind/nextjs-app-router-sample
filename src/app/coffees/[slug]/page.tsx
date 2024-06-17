@@ -17,7 +17,7 @@ const getCoffee = async (type: CoffeeType, id: number): Promise<Coffee> => {
   const resp = await fetch(
     `https://oqqhqztkvpb5q3od6h7r57q32e0xxezp.lambda-url.ap-southeast-2.on.aws/coffee/${type}/${id}`,
     {
-      next: { revalidate: 180 },
+      // next: { revalidate: 180 },
     },
   );
   const coffee = (await resp.json()) as Exclude<Coffee, "type">;
@@ -65,6 +65,7 @@ export default async function CoffeeDetailPage({ params }: Props) {
 
   return (
     <>
+      <p>built on {new Date().toString()}</p>
       <h1 className="text-lg mb-2">{coffee.title}</h1>
       <p className="line-clamp-3 min-h-[72px] mb-2">{coffee.description}</p>
       <Image
