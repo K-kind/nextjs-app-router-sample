@@ -30,6 +30,9 @@ export default function RootLayout({
               <li>
                 <Link href="/coffees">Coffees</Link>
               </li>
+              <li>
+                <Link href="/ui-sample">UI Sample</Link>
+              </li>
             </ul>
           </nav>
         </header>
