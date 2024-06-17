@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Next.js 14 standalone mode
+Transform:
+- AWS::Serverless-2016-10-31
+Resources:
+  NextjsLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Architectures:
+      - x86_64
+      MemorySize: 512
+      Timeout: 30
+      Description: Next.js 14 standalone mode function
+      Environment:
+        Variables:
+          AWS_LWA_INVOKE_MODE: response_stream
+      ImageUri: nextjslambdafunction:nodejs20.x-v1
+    Metadata:
+      DockerContext: /Users/katahirakeita/Desktop/apps/deployed_apps/nextjs-app-router-sample
+      DockerTag: nodejs20.x-v1
+      Dockerfile: Dockerfile
+      SamResourceId: NextjsLambdaFunction
+  StreamingUrl:
+    Type: AWS::Lambda::Url
+    Properties:
+      TargetFunctionArn:
+        Ref: NextjsLambdaFunction
+      AuthType: NONE
+      InvokeMode: RESPONSE_STREAM
+  PermissionForURLInvoke:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName:
+        Ref: NextjsLambdaFunction
+      FunctionUrlAuthType: NONE
+      Action: lambda:InvokeFunctionUrl
+      Principal: '*'
