@@ -1,8 +1,14 @@
 import "./globals.css";
+import "@mantine/core/styles.css";
 
+import { createTheme, MantineProvider } from "@mantine/core";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
+
+const theme = createTheme({
+  /** Put your mantine theme override here */
+});
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,7 +42,9 @@ export default function RootLayout({
             </ul>
           </nav>
         </header>
-        <main className="container mx-auto p-4 flex-grow">{children}</main>
+        <main className="container mx-auto p-4 flex-grow">
+          <MantineProvider theme={theme}>{children}</MantineProvider>
+        </main>
         <footer className="bg-blue-400">
           <div className="container mx-auto p-4">
             <p className="text-center">

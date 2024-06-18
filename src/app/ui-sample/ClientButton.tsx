@@ -1,11 +1,11 @@
-"use client";
+import { Button } from "@mantine/core";
 
 import { Logger } from "@/app/ui-sample/Logger";
 
 export const ClientButton = () => {
   return (
-    <button>
+    <Button>
       クライアント側のボタン <Logger />
-    </button>
+    </Button>
   );
 };
